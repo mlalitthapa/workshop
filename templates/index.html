@@ -1,0 +1,11 @@
+<h2>{{.Title}}</h2>
+
+<ul>
+{{range .ToDos}}
+{{if .Done}}
+    <li>{{.Title}} - &check;</li>
+{{else}}
+    <li>{{.Title}} - &cross;</li>
+{{end}}
+{{end}}
+</ul>
