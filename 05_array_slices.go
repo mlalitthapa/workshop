@@ -4,6 +4,7 @@ import "fmt"
 
 func main() {
 	arrays()
+	slices()
 }
 
 func arrays() {
@@ -13,4 +14,10 @@ func arrays() {
 	for _, a := range arr {
 		fmt.Println(a)
 	}
+}
+
+func slices() {
+	var slice []string
+	slice = append(slice, "first item", "second item")
+	fmt.Println(slice[0], slice[1])
 }
