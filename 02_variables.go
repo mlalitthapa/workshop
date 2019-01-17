@@ -10,5 +10,9 @@ func main() {
 
 	x := 1
 	y := 0.001
-	fmt.Printf("x = %d\ny = %.3f", x, y)
+	fmt.Printf("x = %d\ny = %.3f \n", x, y)
+
+	var t bool
+	var f = false
+	fmt.Printf("t = %t \nf = %t \n", t, f)
 }
