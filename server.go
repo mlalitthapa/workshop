@@ -17,14 +17,41 @@ type PageData struct {
 	ToDos []ToDo
 }
 
+type FormData struct {
+	Name, Email, Message string
+}
+
 func main() {
 	http.HandleFunc("/", handleIndex)
 	http.HandleFunc("/json", handleJsonResponse)
+	http.HandleFunc("/form", showFormHandler)
+	http.HandleFunc("/form/post", postFormHandler)
 
 	fs := http.FileServer(http.Dir("static/"))
 	http.Handle("/asset/", http.StripPrefix("/asset/", fs))
 
 	http.ListenAndServe(":8000", nil)
+}
+
+func postFormHandler(writer http.ResponseWriter, request *http.Request) {
+	if request.Method != http.MethodPost {
+		http.Redirect(writer, request, "/form", 302)
+		return
+	}
+
+	formData := FormData{
+		Name: request.FormValue("name"),
+		Email: request.FormValue("email"),
+		Message: request.FormValue("message"),
+	}
+
+	json.NewEncoder(writer).Encode(formData)
+}
+
+func showFormHandler(writer http.ResponseWriter, request *http.Request) {
+	writer.Header().Set("Content-Type", "text/html")
+	form := template.Must(template.ParseFiles("templates/form.html"))
+	form.Execute(writer, nil)
 }
 
 func handleJsonResponse(writer http.ResponseWriter, request *http.Request) {
