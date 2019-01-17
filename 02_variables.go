@@ -2,7 +2,12 @@ package main
 
 import "fmt"
 
+var globalVariable string
+
 func main() {
+
+	globalVariable = "This is global variable"
+
 	var a string
 	var b = "string"
 
@@ -15,4 +20,10 @@ func main() {
 	var t bool
 	var f = false
 	fmt.Printf("t = %t \nf = %t \n", t, f)
+
+	otherFunction()
+}
+
+func otherFunction() {
+	fmt.Printf("global variable = %s", globalVariable)
 }
