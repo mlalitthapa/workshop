@@ -28,6 +28,7 @@ func total(nums []int) int {
 	return sum
 }
 
+// Calculate average with callback function
 func average(nums []int, cb func([]int) int) float64 {
 	total := cb(nums)
 	return float64(total) / float64(len(nums))
